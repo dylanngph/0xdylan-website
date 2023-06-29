@@ -17,6 +17,12 @@ export const palettes = {
       600: "#141518",
       'greyTransparent': 'rgba(47,50,65, .5)'
     },
+    whiteAlpha: {
+      50: "rgba(255, 255, 255, 0.05)",
+    },
+    blackAlpha: {
+      50: "rgba(0, 0, 0, 0.05)",
+    },
     primary: {
       50: "#F4F7FE",
       100: "#E9F0FC",

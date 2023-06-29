@@ -1,10 +1,9 @@
 import PRESALE_ABI from "@/constants/abis/presale.json";
 import { BUSD_ADDRESS, USDC_ADDRESS, USDT_ADDRESS } from "@bionlabs/core-sdk";
 import { useEffect, useState } from "react";
-import { formatUnits } from "ethers/lib/utils.js";
-import type { BigNumberish } from "ethers";
 import { useContractRead, useToken } from "wagmi";
 import { useChain } from "./useChain";
+import { formatUnits } from "viem";
 
 export function usePresaleContract({
   contractAdrress,
@@ -85,7 +84,7 @@ export const useLaunchpad = (launchpad: any) => {
   })
 
   const progress = currentCap ?
-    (Number(formatUnits(currentCap as BigNumberish, decimals)) * 100) /
+    (Number(formatUnits(currentCap as bigint, decimals)) * 100) /
     Number(launchpad?.fHardCap) : 0
 
   return {
@@ -98,7 +97,7 @@ export const useLaunchpad = (launchpad: any) => {
     whitelisteds: whitelisted ? whitelisted : false,
     decimals,
     currentCap: currentCap
-      ? formatUnits(currentCap as BigNumberish, decimals)
+      ? formatUnits(currentCap as bigint, decimals)
       : 0,
     progress,
     purchaseDetails: (purchaseDetails as any)?.result ? formatUnits((purchaseDetails as any).result[1] , decimals) : 0,

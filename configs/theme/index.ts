@@ -3,7 +3,7 @@ import { mode } from '@chakra-ui/theme-tools'
 import { palettes } from "./palettes";
 
 const config = {
-  initialColorMode: "light",
+  initialColorMode: "dark",
   useSystemColorMode: false,
 };
 
@@ -12,17 +12,12 @@ export const theme = extendTheme({
   config,
   sizes: {
     container: {
-      sm: '640px',
-      md: '768px',
-      lg: '1024px',
-      xl: '1184px',
       xxl: '1400px',
     },
   },
   styles: {
     global: (props: StyleFunctionProps) => ({
       body: {
-        fontFamily: '"Open Sans", sans-serif',
         bg: mode(palettes.colors.neutral[0] , palettes.colors.neutral[600])(props),
         WebkitTapHighlightColor: 'transparent',
       },
@@ -31,7 +26,7 @@ export const theme = extendTheme({
   components: {
     Button: {
       baseStyle: {
-        borderRadius: '8px',
+        borderRadius: '4px',
         fontSize: '0.875rem',
       },
       variants: {

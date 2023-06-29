@@ -3,74 +3,86 @@
 import React from "react";
 import {
   Box,
-  Text,
-  HStack,
-  VStack,
-  Button,
-  Grid,
-  GridItem,
   Stack,
+  VStack,
   useColorMode,
+  Text,
+  useColorModeValue,
+  HStack,
+  IconButton,
 } from "@chakra-ui/react";
-import TrendingCard from "./components/Card/TrendingCard";
-import Analytics from "../Analytics";
-import styled from "@emotion/styled";
-import Image from "next/image";
+import { TypeAnimation } from 'react-type-animation';
+import { FiCopy } from 'react-icons/fi';
+import VoxelDogLoader from "@/components/Model/VoxelDogLoader";
+import dynamic from "next/dynamic";
+
+
+const LazyVoxelDog = dynamic(() => import('@/components/Model/VoxelDog'), {
+  ssr: false,
+  loading: () => <VoxelDogLoader />
+})
 
 const Hero = () => {
-  const { colorMode } = useColorMode();
 
   return (
-    <Box w="100%">
-      <Stack
-        justify="space-between"
-        direction={{ base: "column", lg: "row" }}
-        spacing={4}
-        align="start"
-      >
-        <Box order={{ base: 2, lg: 1 }}>
-          <VStack align="start" maxW="600px" spacing={6}>
-            <VStack>
-              <Text fontSize={{ base: 32, lg: 42 }} fontWeight={700}>
-                Defining the Future of Web3 Together
-              </Text>
-              <Text fontSize={{ base: 16, lg: 20 }} color="neutral.300">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem
-                ipsum dolor sit amet, consectetur adipiscing elit.
-              </Text>
-            </VStack>
-
-            <HStack mb={5}>
-              <Button variant="primary" size='lg'>Create BUILDs</Button>
-              <Button variant="outline" size='lg' color='primary.400' borderColor='primary.400'>Learn more</Button>
-            </HStack>
-            {/* <Analytics /> */}
+    <Box py='8rem'>
+      <Stack direction={{base: 'column', lg: 'row'}} w='100%' justifyContent='space-between' minH='380px'>
+        <VStack align='start' spacing={9}>
+          <VStack align='start'>
+            <Text fontFamily='SamsungSharpSans' fontWeight={700} fontSize={{base: 56 ,lg: 72}} lineHeight={1}>
+              Web3 Builder
+            </Text>
+            <Text fontFamily='SamsungSharpSans' fontSize={{base: 24 , lg: 32}} fontWeight={700}>
+            through Frontend Excellence
+            </Text>
+            <Text color='neutral.300' maxW='500px'>
+            Join me on this exciting journey as we shape the future of the web together, one exceptional frontend experience at a time.
+            </Text>
           </VStack>
-        </Box>
-        <Box w={{ base: "100%", lg: "auto" }} order={{ base: 1, lg: 2 }}>
-          <Image
-            src={
-              colorMode == "dark"
-                ? "/images/pages/home/illus-light.svg"
-                : "/images/pages/home/illus.svg"
-            }
-            alt="illus"
-            width={700}
-            height={400}
-          />
+          <HStack
+            bg={useColorModeValue("blackAlpha.50", "whiteAlpha.50")}
+            px={4}
+            py={3}
+            borderRadius={4}
+            border='1px solid'
+            borderColor={useColorModeValue("gray.200", "gray.700")}
+            w={{base: '100%' ,lg: '450px'}}
+            justify='space-between'
+            align='baseline'
+          >
+            <HStack align='baseline'>
+              <Text fontWeight={600} fontSize={20}>
+                $
+              </Text>
+              <TypeAnimation
+                sequence={[
+                  "Hello, I'm a Frontend Developer.",
+                  2000, // Waits 1s
+                  "Hello, I'm building web3 applications.",
+                  2000, // Waits 2s
+                  "Hello, I'm also building communities.",
+                  2000
+                ]}
+                wrapper="span"
+                cursor={true}
+                repeat={Infinity}
+                style={{ fontWeight: '600', fontSize: '16px', display: 'inline-block' }}
+              />
+            </HStack>
+            <IconButton
+              aria-label='Copy'
+              variant='ghost'
+              icon={<FiCopy/>}
+              borderRadius='8px'
+            />
+          </HStack>
+        </VStack>
+        <Box overflow='hidden'>
+          <LazyVoxelDog />
         </Box>
       </Stack>
     </Box>
   );
 };
-
-const HeroIllus = styled(Box)`
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: -1;
-  max-width: 800px;
-  width: 100%;
-`;
 
 export default Hero;

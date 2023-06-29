@@ -14,15 +14,21 @@ import {
   HStack,
   IconButton,
   useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import Logo from "./Logo";
-import { publicMenu, submenu } from "@/configs/menu";
+import { publicMenu } from "@/configs/menu";
 import { IoSearch } from "react-icons/io5";
 import MainButton from "./MainButton";
 import styled from "@emotion/styled";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useDevice } from "@/hooks/useDevice";
-import { HiOutlineSun, HiOutlineMoon, HiOutlineMenu } from "react-icons/hi";
+import {
+  HiOutlineSun,
+  HiOutlineMoon,
+  HiOutlineMenu,
+  HiMoon,
+} from "react-icons/hi";
 import { useOnScroll } from "@/hooks/useOnScroll";
 
 const Menu = ({ children }: { children: React.ReactNode }) => {
@@ -31,53 +37,50 @@ const Menu = ({ children }: { children: React.ReactNode }) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isScrolling } = useOnScroll();
 
+  const iconButtonBg = useColorModeValue('purple', 'orange');
+  const primaryButtonBg = useColorModeValue('teal', 'green');
+
   return (
     <Fragment>
-      <Wrapper
-        boxShadow={{ lg: isScrolling ? "sm" : "none" }}
-        borderBottom="1px solid"
-        borderColor={colorMode === "light" ? "gray.200" : "gray.700"}
-        bg={colorMode === "light" ? "inherit" : "neutral.500"}
-      >
-        <Container maxW="100%" px={6} py={2}>
+      <Wrapper boxShadow={{ lg: isScrolling ? "sm" : "none" }} bg="inherit">
+        <Container maxW="container.xl">
           <Flex w="100%" justify="space-between" align="center">
-            <HStack align="center" spacing={6}>
+            <HStack spacing={12}>
               <Logo />
-              {isDesktop ? (
-                <Box>
-                  <InputGroup>
-                    <Input
-                      placeholder="Search BUIDLs, Hackathons..."
-                      width={{ base: "auto", lg: "300px" }}
-                      variant="filled"
-                      borderRadius={{ base: "full", lg: "full" }}
-                      _placeholder={{ fontSize: 14 }}
-                    />
-                    <InputRightElement
-                      color={colorMode == "dark" ? "gray.300" : "gray.500"}
-                      opacity="0.5"
-                      // w={8}
-                      // h={8}
-                    >
-                      <IoSearch />
-                    </InputRightElement>
-                  </InputGroup>
-                </Box>
-              ) : (
-                <IconButton
-                  aria-label="Search"
-                  icon={<IoSearch />}
-                  variant="ghost"
-                />
+              {isDesktop && (
+                <HStack spacing={8}>
+                  {publicMenu.map((item, index) => {
+                    return (
+                      <NavButton
+                        key={index}
+                        title={item.title}
+                        href={item.href}
+                        pathname={pathname}
+                        icon={item.icon}
+                      />
+                    );
+                  })}
+                </HStack>
               )}
             </HStack>
-            <HStack spacing={6} minH="60px">
+
+            <HStack spacing={2} minH="60px">
               {isDesktop ? (
                 <>
-                  <Button variant="link">
-                    Create Account
+                  
+                  <Button
+                    px={6}
+                    colorScheme={primaryButtonBg}
+                  >
+                    Donate me
                   </Button>
-                  <MainButton />
+                  <IconButton
+                    aria-label="Toggle Color Mode"
+                    colorScheme={iconButtonBg}
+                    icon={colorMode === "light" ? <HiMoon /> : <HiOutlineSun />}
+                    fontSize={18}
+                    onClick={toggleColorMode}
+                  />
                 </>
               ) : (
                 <IconButton
@@ -91,88 +94,44 @@ const Menu = ({ children }: { children: React.ReactNode }) => {
             </HStack>
           </Flex>
         </Container>
-        {isDesktop && (
-          <Container maxW="100%" px={6}>
-            <HStack w="100%" justify="space-between" pb="2px">
-              <HStack spacing={8}>
-                {publicMenu.map((item, index) => {
-                  const isActive = pathname.startsWith(item.href);
-                  return (
-                    <NavButton
-                      key={index}
-                      isActive={isActive}
-                      title={item.title}
-                    />
-                  );
-                })}
-              </HStack>
-              <HStack spacing={4}>
-                {submenu.map((item, index) => {
-                  const isActive = pathname.startsWith(item.href);
-                  return (
-                    <NavButton
-                      key={index}
-                      isActive={isActive}
-                      title={item.title}
-                    />
-                  );
-                })}
-                <IconButton
-                  aria-label="Toggle Color Mode"
-                  variant="tertiary"
-                  px={3}
-                  pb={1}
-                  icon={
-                    colorMode === "light" ? <HiOutlineSun /> : <HiOutlineMoon />
-                  }
-                  fontSize={24}
-                  onClick={toggleColorMode}
-                />
-              </HStack>
-            </HStack>
-          </Container>
-        )}
       </Wrapper>
-      <Inner pt={isDesktop ? "118px" : "78px"}>{children}</Inner>
+      <Inner pt="60px">{children}</Inner>
     </Fragment>
   );
 };
 
 const NavButton = ({
-  isActive,
   title,
+  href,
+  pathname,
+  icon,
+  ...props
 }: {
-  disabled?: boolean;
-  isActive: boolean;
   title: string;
+  href: string;
+  pathname: string;
+  icon?: any;
 }) => {
+  const isActive = href !== "/" ? pathname.startsWith(href) : pathname === href;
+
   return (
-    <Box
+    <Button
+      variant='tertiary'
       h="fit-content"
       px={1}
-      color={isActive ? "primary.400" : "inherit"}
-      cursor="pointer"
-      fontWeight={600}
-      position="relative"
-      transition="color 0.15s ease-in-out"
+      fontWeight={400}
+      opacity={isActive ? 1 : 0.6}
+      transition="opacity 0.15s ease-in-out"
       _hover={{
-        color: "primary.400",
+        opacity: 1,
       }}
-      _before={{
-        content: '""',
-        display: "block",
-        height: "2px",
-        width: "100%",
-        bg: "primary.400",
-        opacity: isActive ? 1 : 0,
-        transition: "opacity 0.15s ease-in-out",
-        position: "absolute",
-        bottom: "-10px",
-        left: 0,
-      }}
+      leftIcon={icon ?
+        <Icon as={icon} /> : undefined
+      }
+      {...props}
     >
       {title}
-    </Box>
+    </Button>
   );
 };
 

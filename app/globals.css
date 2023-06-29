@@ -1,3 +1,24 @@
+@font-face {
+  font-family: "SamsungSharpSans";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/samsungsharpsans.woff") format("woff");
+}
+
+@font-face {
+  font-family: "SamsungSharpSans";
+  font-style: normal;
+  font-weight: 500;
+  src: url("/fonts/samsungsharpsans-medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: "SamsungSharpSans";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/fonts/samsungsharpsans-bold.woff") format("woff");
+}
+
 * {
   box-sizing: border-box;
 }
