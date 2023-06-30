@@ -13,7 +13,7 @@ const Logo = () => {
       <Text
         fontFamily='SamsungSharpSans'
         fontWeight={700}
-        fontSize={{ base: "xl", md: "2xl" }}
+        fontSize={{ base: "lg", md: "xl" }}
       >
         DylanNguyen.
       </Text>

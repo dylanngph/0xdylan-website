@@ -5,13 +5,13 @@ import {
     Container, VStack
 } from '@chakra-ui/react'
 import Hero from './sections/Hero'
-import UpcomingSale from './sections/UpcomingSale'
-import Analytics from './sections/Analytics'
+import About from './sections/About/About'
 
 const HomePage = () => {
   return (
     <Container maxW='container.xl'>
         <Hero/>
+        <About/>
     </Container>
   )
 }

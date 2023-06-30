@@ -5,11 +5,7 @@ import {
   Container,
   Flex,
   Button,
-  ButtonGroup,
-  Input,
   Box,
-  InputGroup,
-  InputRightElement,
   Icon,
   HStack,
   IconButton,
@@ -18,14 +14,11 @@ import {
 } from "@chakra-ui/react";
 import Logo from "./Logo";
 import { publicMenu } from "@/configs/menu";
-import { IoSearch } from "react-icons/io5";
-import MainButton from "./MainButton";
 import styled from "@emotion/styled";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useDevice } from "@/hooks/useDevice";
 import {
   HiOutlineSun,
-  HiOutlineMoon,
   HiOutlineMenu,
   HiMoon,
 } from "react-icons/hi";
@@ -39,10 +32,11 @@ const Menu = ({ children }: { children: React.ReactNode }) => {
 
   const iconButtonBg = useColorModeValue('purple', 'orange');
   const primaryButtonBg = useColorModeValue('teal', 'green');
+  const bg = useColorModeValue('neutral.0', 'neutral.500');
 
   return (
     <Fragment>
-      <Wrapper boxShadow={{ lg: isScrolling ? "sm" : "none" }} bg="inherit">
+      <Wrapper boxShadow={{ lg: isScrolling ? "sm" : "none" }} bg={bg}>
         <Container maxW="container.xl">
           <Flex w="100%" justify="space-between" align="center">
             <HStack spacing={12}>
