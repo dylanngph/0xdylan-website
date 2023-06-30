@@ -8,17 +8,22 @@ import {
   HStack,
   Image,
   useColorModeValue,
-  Container,
-  Stack,
   Grid,
   GridItem,
-  Card,
-  CardBody,
-  Heading,
-  CardFooter,
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionPanel,
+  AccordionItem,
+  Link,
+  Icon,
   Button,
-  CardHeader,
 } from "@chakra-ui/react";
+import {
+  AiFillGithub,
+  AiOutlineTwitter,
+  AiFillFacebook,
+} from "react-icons/ai";
 
 const About = () => {
   const bio = [
@@ -78,6 +83,33 @@ const About = () => {
     },
   ];
 
+  const socials = [
+    {
+      name: "Github",
+      username: "@dylanngph",
+      link: "https://github.com/dylanngph",
+      icon: AiFillGithub,
+    },
+    {
+      name: "Dylan Twitter",
+      username: "@dylanngph",
+      link: "https://twitter.com/Dylanngph",
+      icon: AiOutlineTwitter,
+    },
+    {
+      name: "BionLabs Twitter",
+      username: "@bionLabs",
+      link: "https://twitter.com/bionLabs",
+      icon: AiOutlineTwitter,
+    },
+    {
+      name: "Facebook",
+      username: "@DylanNguyennnnn",
+      link: "https://www.facebook.com/DylanNguyennnnn/",
+      icon: AiFillFacebook,
+    },
+  ];
+
   return (
     <Box>
       <Grid
@@ -88,11 +120,26 @@ const About = () => {
         gap="60px"
       >
         <GridItem>
-          <VStack align="start" w="100%" spacing={6}>
-            <VStack align="start">
-              <Text fontWeight={700} fontSize={36}>
-                About me
-              </Text>
+          <VStack align="start" w="100%" spacing={12}>
+            <VStack align="start" spacing={6}>
+              <HStack align="start" spacing={4}>
+                <Image
+                  src="/images/avatar.png"
+                  alt="avatar"
+                  w="100px"
+                  h="100px"
+                  borderRadius="full"
+                />
+                <Box>
+                  <Text fontWeight={700} fontSize={{base: 32 , lg: 36}}>
+                    Dylan Nguyen
+                  </Text>
+                  <Text>
+                    Web3 Builder (Developer, Designer, Community Builder)
+                  </Text>
+                </Box>
+              </HStack>
+
               <Text color={useColorModeValue("gray.700", "gray.300")}>
                 I possess extensive expertise as a seasoned Builder, capable of
                 seamlessly integrating my skills across multiple domains within
@@ -106,37 +153,56 @@ const About = () => {
                 team, I consistently demonstrate effective self-management and
                 foster a productive working environment.
               </Text>
-            </VStack>
-            <VStack align="start" spacing={6}>
-              <Text fontWeight={700} fontSize={36}>
-                My Major
-              </Text>
-              <VStack spacing={4}>
+              <Accordion allowToggle defaultIndex={[0]} w="100%">
                 {majors.map((item, index) => (
-                  <Card
+                  <AccordionItem key={index}>
+                    <AccordionButton
+                      _expanded={{ bg: "teal", color: "white" }}
+                      py={3}
+                    >
+                      <Box flex="1" textAlign="left">
+                        <Text fontSize={18} fontWeight={600}>
+                          {item.title}
+                        </Text>
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                    <AccordionPanel pb={4}>
+                      <Text py="2" fontSize={14}>
+                        {item.description}
+                      </Text>
+                    </AccordionPanel>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </VStack>
+            <VStack align='start' spacing={4}>
+              <Box borderBottom="3px solid" borderColor="teal" pb={1}>
+                <Text fontWeight={700} fontSize={24}>
+                  On the web
+                </Text>
+              </Box>
+              <VStack align='start'>
+                {socials.map((item, index) => (
+                  <Button
                     key={index}
-                    direction={{ base: "column", sm: "row" }}
-                    overflow="hidden"
-                    variant="outline"
-                    bg={cardBg}
+                    variant='link'
+                    as="a"
+                    target="_blank"
+                    href={item.link}
                   >
-                    <CardHeader>
-                      <Heading size="md">0{index + 1}</Heading>
-                    </CardHeader>
-                    <Stack>
-                      <CardBody>
-                        <Heading size="md">{item.title}</Heading>
-                        <Text py="2" fontSize={14}>{item.description}</Text>
-                      </CardBody>
-                    </Stack>
-                  </Card>
+                    <HStack>
+                      <Icon as={item.icon} fontSize={20} />
+                      <Text>{item.username}</Text>
+                    </HStack>
+                  </Button>
                 ))}
               </VStack>
             </VStack>
           </VStack>
         </GridItem>
         <GridItem>
-          <VStack align="start" w="100%">
+          <VStack align="start" w="100%" spacing={8}>
             <Text fontWeight={700} fontSize={36}>
               Bio
             </Text>

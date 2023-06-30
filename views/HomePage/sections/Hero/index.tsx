@@ -32,7 +32,7 @@ const Hero = () => {
         w="100%"
         justifyContent="space-between"
         minH="380px"
-        h={{ base: "300px", lg: "400px" }}
+        h={{ base: "fit-content", lg: "400px" }}
         >
         <VStack align="start" spacing={9}>
           <VStack align="start">
@@ -106,8 +106,8 @@ const Hero = () => {
           </Box>
           
           <Box
-            w={{ base: "280px", md: "300px", lg: "480px" }}
-            h={{ base: "280px", md: "300px", lg: "400px" }}
+            w={{ base: "250px", md: "300px", lg: "480px" }}
+            h={{ base: "250px", md: "300px", lg: "400px" }}
             position="absolute"
             top="0"
             left="10%"

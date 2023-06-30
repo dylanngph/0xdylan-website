@@ -26,7 +26,7 @@ export const theme = extendTheme({
   components: {
     Button: {
       baseStyle: {
-        borderRadius: '4px',
+        borderRadius: '0',
         fontSize: '0.875rem',
       },
       variants: {
@@ -40,9 +40,6 @@ export const theme = extendTheme({
             bg: palettes.colors.primary[700],
           }
         }),
-        link: {
-          color: palettes.colors.primary[400],
-        },
         connectorButton: {
           bg: palettes.colors.neutral[400],
           _hover: {

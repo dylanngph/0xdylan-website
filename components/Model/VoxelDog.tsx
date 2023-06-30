@@ -12,7 +12,7 @@ const VoxelDog = () => {
   const refContainer = useRef<any>();
   const [loading, setLoading] = useState(true);
   const refRenderer = useRef<any>();
-  const urlDogGLB = "https://craftzdog.global.ssl.fastly.net/homepage/dog.glb";
+  const urlDogGLB = "/model3d/dog.glb";
 
   const handleWindowResize = useCallback(() => {
     const { current: renderer } = refRenderer;

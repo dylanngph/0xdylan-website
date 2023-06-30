@@ -31,7 +31,7 @@ const Menu = ({ children }: { children: React.ReactNode }) => {
   const { isScrolling } = useOnScroll();
 
   const iconButtonBg = useColorModeValue('purple', 'orange');
-  const primaryButtonBg = useColorModeValue('teal', 'green');
+  const primaryButtonBg = useColorModeValue('teal', 'teal');
   const bg = useColorModeValue('neutral.0', 'neutral.500');
 
   return (
