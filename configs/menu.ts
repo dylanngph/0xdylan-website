@@ -9,7 +9,7 @@ export const publicMenu = [
   },
   {
     title: "Works",
-    href: "/launchpad",
+    href: "/works",
   },
   {
     title: "Blog",
@@ -18,7 +18,7 @@ export const publicMenu = [
   },
   {
     title: "Source",
-    href: "/source",
-    icon: AiFillGithub
+    href: "https://github.com/dylanngph",
+    icon: AiFillGithub,
   }
 ];

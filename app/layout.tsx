@@ -2,9 +2,8 @@ import "./globals.css";
 import { Open_Sans, Inter } from "next/font/google";
 import Providers from "./providers";
 import Menu from "@/components/Menu";
-import Footer from "@/components/Footer/Footer";
 
-const openSans = Open_Sans({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "0xdylan - Homepage",
@@ -35,10 +34,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={openSans.className}>
+      <body className={inter.className}>
         <Providers>
           <Menu>{children}</Menu>
-          <Footer/>
         </Providers>
       </body>
     </html>

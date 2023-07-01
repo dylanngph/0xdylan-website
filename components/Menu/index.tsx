@@ -23,6 +23,9 @@ import {
   HiMoon,
 } from "react-icons/hi";
 import { useOnScroll } from "@/hooks/useOnScroll";
+import NextLink from "next/link";
+import Footer from "../Footer/Footer";
+
 
 const Menu = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
@@ -89,7 +92,10 @@ const Menu = ({ children }: { children: React.ReactNode }) => {
           </Flex>
         </Container>
       </Wrapper>
-      <Inner pt="60px">{children}</Inner>
+      <Inner pt="60px">
+        {children}
+      </Inner>
+      <Footer/>
     </Fragment>
   );
 };
@@ -112,6 +118,7 @@ const NavButton = ({
     <Button
       variant='tertiary'
       h="fit-content"
+      as={NextLink}
       px={1}
       fontWeight={400}
       opacity={isActive ? 1 : 0.6}
@@ -122,6 +129,7 @@ const NavButton = ({
       leftIcon={icon ?
         <Icon as={icon} /> : undefined
       }
+      href={href}
       {...props}
     >
       {title}
@@ -136,6 +144,8 @@ const Wrapper = styled(Box)`
   top: 0;
   left: 0;
 `;
-const Inner = styled(Box)``;
+const Inner = styled(Box)`
+  min-height: calc(100vh - 120px);
+`;
 
 export default Menu;

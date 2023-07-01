@@ -26,7 +26,7 @@ const Hero = () => {
   const radialBg = useColorModeValue('radial-gradient(50% 50.00% at 50% 50.00%, rgba(50, 255, 243, 0.50) 0%, rgba(174, 99, 249, 0.00) 100%)', 'radial-gradient(50% 50.00% at 50% 50.00%, rgba(50, 95, 255, 0.50) 0%, rgba(174, 99, 249, 0.00) 100%)')
 
   return (
-    <Box py="8rem">
+    <Box py={{base: '4rem' , lg: "8rem"}}>
       <Stack
         direction={{ base: "column", lg: "row" }}
         w="100%"
