@@ -20,6 +20,7 @@ export const theme = extendTheme({
       body: {
         bg: mode(palettes.colors.neutral[0] , palettes.colors.neutral[600])(props),
         WebkitTapHighlightColor: 'transparent',
+        fontFamily: "'Inter', sans-serif"
       },
     })
   },

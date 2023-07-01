@@ -1,9 +1,7 @@
 import "./globals.css";
-import { Open_Sans, Inter } from "next/font/google";
 import Providers from "./providers";
 import Menu from "@/components/Menu";
 
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "0xdylan - Homepage",
@@ -15,7 +13,7 @@ export const metadata = {
     card: "summary_large_image",
     site: "@0xdylan",
     creator: "@0xdylan",
-    image: "https://www.craftz.dog/card.png",
+    image: "/0xdylan.jpg",
   },
   og: {
     site_name: "0xdylan",
@@ -25,6 +23,21 @@ export const metadata = {
     image: "https://0xdylan.com/og.png",
     description: "Dylan's homepage",
   },
+  link: [
+    {
+      rel: "preconnect",
+      href: "https://fonts.googleapis.com",
+    },
+    {
+      rel: "preconnect",
+      href: "https://fonts.gstatic.com",
+      crossOrigin: "true",
+    },
+    {
+      rel: "stylesheet",
+      href: "https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    }
+  ]
 };
 
 export default function RootLayout({
@@ -34,7 +47,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <Providers>
           <Menu>{children}</Menu>
         </Providers>
