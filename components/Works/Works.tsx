@@ -61,7 +61,7 @@ export const Works = () => {
             />
           </GridItem>
         ))
-      ) : null}
+      ) : !works ? null : <WorkLoadingCard />}
     </Grid>
   );
 };
@@ -104,10 +104,10 @@ const WorkCard = ({
 const WorkLoadingCard = () => {
   return (
     <Card maxW="md" bg="transparent" boxShadow="none" cursor="pointer">
-      <Skeleton w="100%" h="200px" borderRadius="12px" />
+      <Skeleton w="300px" h="200px" borderRadius="12px" />
       <Stack mt="6" spacing="3">
-        <Skeleton w="100%" h="24px" />
-        <Skeleton w="100%" h="72px" />
+        <Skeleton w="300px" h="24px" />
+        <Skeleton w="300px" h="72px" />
       </Stack>
     </Card>
   );
