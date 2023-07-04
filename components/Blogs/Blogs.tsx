@@ -17,7 +17,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
-export const LayoutWorks = ({ children }: { children: React.ReactNode }) => {
+export const LayoutBlogs = ({ children }: { children: React.ReactNode }) => {
   return (
     <Box py={20}>
       <Container maxW="container.xl">
@@ -32,7 +32,7 @@ export const LayoutWorks = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export const Works = () => {
+export const Blogs = () => {
   const { data: works, isLoading } = useQuery({
     queryKey: ["works"],
     queryFn: () => getWorks(),
@@ -53,7 +53,7 @@ export const Works = () => {
       ) : works ? (
         works.data.map((item: any) => (
           <GridItem key={item.id}>
-            <WorkCard
+            <BlogCard
               title={item.attributes.title}
               shortDescription={item.attributes.shortDescription}
               image={item.attributes.featuredImage.data.attributes.url}
@@ -66,7 +66,7 @@ export const Works = () => {
   );
 };
 
-const WorkCard = ({
+const BlogCard = ({
   title,
   shortDescription,
   image = 'https://placehold.co/400x200',
