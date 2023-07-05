@@ -1,6 +1,6 @@
 "use client";
 
-import { getWorks } from "@/api/works";
+import { getPosts, getWorks } from "@/api/works";
 import {
   Box,
   Container,
@@ -15,16 +15,17 @@ import {
   Skeleton,
 } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
-import NextLink from "next/link";
 import React from "react";
+import Link from "next/link";
 
-export const LayoutWorks = ({ children }: { children: React.ReactNode }) => {
+export const LayoutBlog = ({ children }: { children: React.ReactNode }) => {
+
   return (
     <Box py={20}>
       <Container maxW="container.xl">
         <VStack w="100%" align="start" spacing={12}>
           {/* <Text fontSize={{ base: "xl", lg: "2xl" }} fontWeight={700}>
-            Works
+            Posts
           </Text> */}
           <Box>{children}</Box>
         </VStack>
@@ -33,16 +34,16 @@ export const LayoutWorks = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export const Works = () => {
-  const { data: works, isLoading } = useQuery({
-    queryKey: ["works"],
-    queryFn: () => getWorks(),
+export const Blog = () => {
+  const { data: posts, isLoading } = useQuery({
+    queryKey: ["posts"],
+    queryFn: () => getPosts(),
   });
 
   return (
     <VStack w="100%" align="start" spacing={12}>
       <Text fontSize={{ base: "xl", lg: "2xl" }} fontWeight={700}>
-        Works
+        Posts
       </Text>
       <Grid
         templateColumns={{
@@ -54,39 +55,46 @@ export const Works = () => {
         rowGap={12}
       >
         {isLoading ? (
-          <WorkLoadingCard />
-        ) : works ? (
-          works.data.map((item: any) => (
+          <PostLoadingCard />
+        ) : posts ? (
+          posts.data.map((item: any) => (
             <GridItem key={item.id}>
-              <WorkCard
+              <PostCard
+                id={item.id}
                 title={item.attributes.title}
                 shortDescription={item.attributes.shortDescription}
                 image={item.attributes.featuredImage.data.attributes.url}
-                link={item.attributes.link}
+                updatedAt={
+                  item
+                    ? new Date(item.attributes.updatedAt).toLocaleString()
+                    : undefined
+                }
               />
             </GridItem>
           ))
-        ) : !works ? null : (
-          <WorkLoadingCard />
+        ) : !posts ? null : (
+          <PostLoadingCard />
         )}
       </Grid>
     </VStack>
   );
 };
 
-const WorkCard = ({
+const PostCard = ({
+  id,
   title,
   shortDescription,
   image = "https://placehold.co/400x200",
-  link,
+  updatedAt,
 }: {
+  id: string | number;
   title: string;
   shortDescription: string;
   image: string;
-  link: string;
+  updatedAt?: string;
 }) => {
   return (
-    <NextLink href={link ? link : "#"} target="_blank">
+    <Link href={id ? `blog/${id}` : "#"} legacyBehavior>
       <Card
         maxW="md"
         boxShadow="none"
@@ -105,15 +113,20 @@ const WorkCard = ({
           borderRadius="8px"
         />
         <Stack spacing="3" py={6}>
+          {updatedAt && (
+            <Text fontSize={14} color="neutral.300">
+              Update: {updatedAt}
+            </Text>
+          )}
           <Heading size="md">{title}</Heading>
           <Text>{shortDescription}</Text>
         </Stack>
       </Card>
-    </NextLink>
+    </Link>
   );
 };
 
-const WorkLoadingCard = () => {
+const PostLoadingCard = () => {
   return (
     <Card maxW="md" bg="transparent" boxShadow="none" cursor="pointer">
       <Skeleton w="300px" h="200px" borderRadius="12px" />

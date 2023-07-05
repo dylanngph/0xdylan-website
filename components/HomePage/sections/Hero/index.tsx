@@ -67,7 +67,7 @@ const Hero = () => {
             justify="space-between"
             align="baseline"
           >
-            <HStack align="baseline">
+            <HStack align="center">
               <Text fontWeight={600} fontSize={20}>
                 $
               </Text>
@@ -86,7 +86,7 @@ const Hero = () => {
                 cursor={true}
                 repeat={Infinity}
                 style={{
-                  fontWeight: "600",
+                  fontWeight: "400",
                   fontSize: "16px",
                   display: "inline-block",
                 }}

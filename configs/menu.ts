@@ -11,14 +11,23 @@ export const publicMenu = [
     title: "Works",
     href: "/works",
   },
+  // {
+  //   title: "Blog",
+  //   href: "/blog",
+  //   disabled: false
+  // },
   {
-    title: "Blog",
-    href: "/blog",
-    disabled: false
+    title: "Join my DEX",
+    href: "https://bionswap.com",
   },
   {
     title: "Source",
     href: "https://github.com/dylanngph",
     icon: AiFillGithub,
+  },
+  {
+    title: "My resume",
+    href: "/resume/resume.pdf",
+    download: true,
   }
 ];

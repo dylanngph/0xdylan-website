@@ -17,15 +17,12 @@ import { publicMenu } from "@/configs/menu";
 import styled from "@emotion/styled";
 import { usePathname } from "next/navigation";
 import { useDevice } from "@/hooks/useDevice";
-import {
-  HiOutlineSun,
-  HiOutlineMenu,
-  HiMoon,
-} from "react-icons/hi";
+import { HiOutlineSun, HiOutlineMenu, HiMoon } from "react-icons/hi";
 import { useOnScroll } from "@/hooks/useOnScroll";
 import NextLink from "next/link";
 import Footer from "../Footer/Footer";
-
+import MobileDrawer from "./MobileDrawer";
+import DonateButton from "../DonateButton";
 
 const Menu = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
@@ -33,9 +30,9 @@ const Menu = ({ children }: { children: React.ReactNode }) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isScrolling } = useOnScroll();
 
-  const iconButtonBg = useColorModeValue('purple', 'orange');
-  const primaryButtonBg = useColorModeValue('teal', 'teal');
-  const bg = useColorModeValue('neutral.0', 'neutral.500');
+  const iconButtonBg = useColorModeValue("purple", "orange");
+  const primaryButtonBg = useColorModeValue("teal", "teal");
+  const bg = useColorModeValue("neutral.0", "neutral.500");
 
   return (
     <Fragment>
@@ -54,6 +51,7 @@ const Menu = ({ children }: { children: React.ReactNode }) => {
                         href={item.href}
                         pathname={pathname}
                         icon={item.icon}
+                        download={item.download}
                       />
                     );
                   })}
@@ -64,13 +62,7 @@ const Menu = ({ children }: { children: React.ReactNode }) => {
             <HStack spacing={2} minH="60px">
               {isDesktop ? (
                 <>
-                  
-                  <Button
-                    px={6}
-                    colorScheme={primaryButtonBg}
-                  >
-                    Donate me
-                  </Button>
+                  <DonateButton/>
                   <IconButton
                     aria-label="Toggle Color Mode"
                     colorScheme={iconButtonBg}
@@ -80,22 +72,23 @@ const Menu = ({ children }: { children: React.ReactNode }) => {
                   />
                 </>
               ) : (
-                <IconButton
-                  aria-label="Menu"
-                  icon={<HiOutlineMenu />}
-                  variant="ghost"
-                  fontSize={24}
-                  order={2}
-                />
+                <>
+                  <MobileDrawer />
+                  <IconButton
+                    aria-label="Toggle Color Mode"
+                    colorScheme={iconButtonBg}
+                    icon={colorMode === "light" ? <HiMoon /> : <HiOutlineSun />}
+                    fontSize={18}
+                    onClick={toggleColorMode}
+                  />
+                </>
               )}
             </HStack>
           </Flex>
         </Container>
       </Wrapper>
-      <Inner pt="60px">
-        {children}
-      </Inner>
-      <Footer/>
+      <Inner pt="60px">{children}</Inner>
+      <Footer />
     </Fragment>
   );
 };
@@ -105,20 +98,22 @@ const NavButton = ({
   href,
   pathname,
   icon,
+  download,
   ...props
 }: {
   title: string;
   href: string;
   pathname: string;
   icon?: any;
+  download?: boolean;
 }) => {
   const isActive = href !== "/" ? pathname.startsWith(href) : pathname === href;
 
   return (
     <Button
-      variant='tertiary'
+      variant="tertiary"
       h="fit-content"
-      as={NextLink}
+      as={download ? "a" : NextLink}
       px={1}
       fontWeight={400}
       opacity={isActive ? 1 : 0.6}
@@ -126,10 +121,9 @@ const NavButton = ({
       _hover={{
         opacity: 1,
       }}
-      leftIcon={icon ?
-        <Icon as={icon} /> : undefined
-      }
+      leftIcon={icon ? <Icon as={icon} /> : undefined}
       href={href}
+      download={download}
       {...props}
     >
       {title}

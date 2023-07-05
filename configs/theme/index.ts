@@ -85,6 +85,13 @@ export const theme = extendTheme({
           bg: palettes.colors.primary[500],
         }
       }
+    },
+    Drawer: {
+      baseStyle: (props: StyleFunctionProps) => ({
+        dialog: {
+          bg: mode(palettes.colors.neutral[0], palettes.colors.neutral[500])(props),
+        }
+      }),
     }
   }
 });
