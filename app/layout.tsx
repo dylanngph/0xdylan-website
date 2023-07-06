@@ -20,7 +20,7 @@ export const metadata = {
     title: "0xdylan",
     type: "website",
     url: "https://0xdylan.com",
-    image: "https://0xdylan.com/og.png",
+    image: "/og.png",
     description: "Dylan's homepage",
   },
   link: [
