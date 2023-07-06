@@ -52,7 +52,7 @@ const MobileDrawer = () => {
 
           <DrawerBody>
             <VStack w="100%" align="start" spacing={12}>
-              <DonateButton/>
+              <DonateButton w='100%' />
               <VStack w="100%" spacing={8} onClick={onClose}>
                 {publicMenu.map((item, index) => {
                   return (

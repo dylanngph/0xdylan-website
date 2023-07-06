@@ -4,7 +4,7 @@ import React from "react";
 import { Button, useColorModeValue } from "@chakra-ui/react";
 import NextLink from "next/link";
 
-const DonateButton = () => {
+const DonateButton = (props:any) => {
   const primaryButtonBg = useColorModeValue("teal", "teal");
 
   return (
@@ -13,6 +13,7 @@ const DonateButton = () => {
         colorScheme={primaryButtonBg}
         as={NextLink}
         href='/donate'
+        {...props}
     >
       Donate me
     </Button>
